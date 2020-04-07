@@ -1,0 +1,399 @@
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+class Triangle
+{  private:
+	class Point
+	{
+	private:
+		int x;
+		int y;
+	struct Vector
+	{
+			int dx;
+			int dy;
+	};
+	
+	public:
+		void setpoint(int x, int y)
+		{
+			this->x = x;
+			this->y = y;
+		}
+		int getx(Point A)
+		{
+		
+			return A.x;
+		
+		}
+		int gety(Point A)
+		{
+		
+			return A.y;
+		
+		}
+		void getpoint()
+		{
+
+			cout << "Координаты точки : " << this->x << " " << this->y << "\n";
+
+		}
+
+		Vector setvector(Point A,Point B)
+		{   Vector V;
+			V.dx = B.x - A.x;
+			V.dy = B.y - A.y;
+			return (V);
+		}
+	  
+	
+	
+	};
+	
+	
+	Point P1;
+	Point P2;
+	Point P3;
+public:
+	void SetTriangleFirst()
+	{  
+		int x1,x2,x3,y1,y2,y3;
+		
+		
+		cout << "Введите координаты вершин прямоугольного треугольника";
+		cout << "\n";
+		cin >> x1;  cin >> y1; cout << "\n";
+		cin >> x2;  cin >> y2; cout << "\n";
+		cin >> x3;  cin >> y3; cout << "\n";
+		if (Proverka(x1, x2, x3, y1, y2, y3) == true && Proverka1(x1, x2, x3, y1, y2, y3) == true)
+		{
+			P1.setpoint(x1, y1);
+			P2.setpoint(x2, y2);
+			P3.setpoint(x3, y3);
+		}
+		else { if (Proverka(x1, x2, x3, y1, y2, y3) == false) { cout << "Треугольник не является прямоугольным" << "\n"; cout << "Программа завершает работу" << "\n"; exit(0); }
+		if (Proverka1(x1, x2, x3, y1, y2, y3) == false) {cout <<"Треугольник не параллелен осям"<<"\n"; cout << "Программа завершает работу" << "\n"; exit(0);
+		}
+		}
+		
+	}
+	
+	void SetTriangleSecond()
+	{
+		/*const double PI = 3.14;
+		int R, Xc, Yc,Choice;
+		cout << "Введите координаты центра описанной вокруг прямоугольного треугольника окружности" << "\n";
+		cin >> Xc; cin >> Yc; cout << "\n";
+		cout << "Введите радиус описанной вокруг прямоугольного треугольника окружности" << "\n";
+		cin >> R; cout << "\n";
+		cout << "Как вы хотите расположить треуголник: " << "\n";
+		cout << "1-Гипотенуза параллельна Ох" << "\n";
+		cout << "2-Гипотенуза параллельна Оу" << "\n";
+
+		cin >> Choice;
+		
+		switch (Choice)
+		{
+		case 1: {break; }
+		case 2: {Point A,B;    
+			int Ax, Bx, Ay, By;
+			
+			Ax = Xc;
+			Ay = Yc + R;
+			A.setpoint(Ax,Ay);
+			Bx = Xc;
+			By = Yc - R;
+			B.setpoint(Bx, By);
+			int AlphaChoice;
+			cout<<"Выберите углы в треугольнике : " << "\n";
+			cout<<"1-Соотношение углов 30/60/90" << "\n";
+			cout<<"2-Соотношение углов 45/45/90" << "\n";
+			cin >> AlphaChoice;
+			switch (AlphaChoice)
+			{
+			case 1: { double alpha, beta, gamma;
+				alpha = cos(30*PI/180);
+				beta = cos(60*PI/180);
+				gamma = cos(90*PI/180);
+
+
+				
+				
+				
+				
+				
+				break; }
+			case 2: {
+				
+				
+				
+				
+				
+				break; }
+	       		
+			}
+			
+			
+			
+			break; }
+		
+		}
+	
+	
+	
+	
+	
+	
+	*/
+	
+	
+	
+	
+	
+	}
+	void PointSearch() //Поиск точки в области треугольника
+	{
+		Point A; 
+		int Ax,Ay;
+		cout << "Введите координаты искомой точки" << "\n";
+		cin >> Ax;
+		cin >> Ay;
+		A.setpoint(Ax,Ay);
+		
+		SetTriangleFirst();
+		int A1, B1, C1,X1,X2,X3,Y1,Y2,Y3;
+		X1 = P1.getx(P1);
+		X2 = P2.getx(P2);
+		X3 = P3.getx(P3);
+		Y1 = P1.gety(P1);
+		Y2 = P2.gety(P2);
+		Y3 = P3.gety(P3);
+		
+		
+		
+		
+		
+		A1 = (X1 - Ax) * (Y2 - X1) - (Y2 - X1) * (Y1 - Ay);
+		B1= (X2 - Ax) * (Y3 - Y2) - (X3 - X2) * (Y2 - Ay);
+		C1= (X3 - Ax) * (Y1 - Y3) - (X1 - X3) * (Y3 - Ay);
+	
+	
+	
+		if ((A1 >= 0 && B1 >= 0 && C1 >= 0) || (A1 <= 0 && B1 <= 0 && C1 <= 0))
+		{
+			cout << "Точка принадлежит треугольнику" << "\n";
+		}
+		else
+		{
+			cout << "Точка не принадлжеит треугольнику" << "\n";
+		}
+
+
+		
+
+
+	}
+	void ShowSquare() //Вычисление Плошади
+	{
+		SetTriangleFirst();
+		
+		double P,S,a,b,c;
+		
+		int A1, B1, C1, X1, X2, X3, Y1, Y2, Y3;
+		X1 = P1.getx(P1);
+		X2 = P2.getx(P2);
+		X3 = P3.getx(P3);
+		Y1 = P1.gety(P1);
+		Y2 = P2.gety(P2);
+		Y3 = P3.gety(P3);
+		a = 0;
+		b = 0;
+		c = 0;
+		a = sqrt((X2 - X1)*(X2-X1) + (Y2 - Y1)*(Y2-Y1)); //AB
+		b = sqrt((X3 - X2)* (X3 - X2) + (Y3 - Y2)*(Y3 - Y2)); //BC
+		c = sqrt((X1 - X3)* (X1 - X3) + (Y1 - Y3)* (Y1 - Y3)); //CA
+		P = (a + b + c)/2;
+		S = sqrt(P * (P - a) * (P - b) * (P - c));
+		cout<<S<<"\n";
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+	bool Proverka(int x1,int x2,int x3,int y1,int y2,int y3)//Проверка на прямоугольность треугольника
+	{
+		double dx1,dx2,dx3,dy1,dy2,dy3,Ax,Bx,Ay,By,Cx,Cy;
+		dx1 = (double)x1;
+		dx2 = (double)x2;
+		dx3 = (double)x3;
+		dy1 = (double)y1;
+		dy2 = (double)y2;
+		dy3 = (double)y3;
+
+		Ax = dx2 - dx1; //находим координаты векторов
+		Ay = dy2 - dy1;//AB
+		Cx = dx1 - dx3;//CA
+		Cy = dy1 - dy3;
+		Bx = dx3 - dx2;//BC
+		By = dy3 - dy2;
+		
+		
+		double z = (Ax * Bx + Ay * By) / ((sqrt(Ax * Ax + Ay * Ay) * sqrt(Bx * Bx + By * By)));//Угол между АB и BC//Косинус углов треугольника
+		double zn = (Ax * Cx + Ay * Cy) / ((sqrt(Ax * Ax + Ay * Ay) * sqrt(Cx * Cx + Cy * Cy)));//Угол между AB и CA
+		double zn1 = (Bx * Cx + By * Cy) / ((sqrt(Bx * Bx + By * By) * sqrt(Cx * Cx + Cy * Cy)));//Угол между BC и СA
+		if (z == 0.0||zn==0.0||zn1==0.0)
+		{
+			return true;
+		}
+		else { return false; }
+		
+	}
+	bool Proverka1(int x1, int x2, int x3, int y1, int y2, int y3)//Проверка на параллельность сторон осям координат
+	{
+		double BaseX, BaseY;
+		BaseX = 5.0; BaseY = 0.0;
+
+		double dx1, dx2, dx3, dy1, dy2, dy3, Ax, Bx, Ay, By, Cx, Cy;
+		dx1 = (double)x1;
+		dx2 = (double)x2;
+		dx3 = (double)x3;
+		dy1 = (double)y1;
+		dy2 = (double)y2;
+		dy3 = (double)y3;
+
+		Ax = dx2 - dx1; //находим координаты векторов
+		Ay = dy2 - dy1;//AB
+		Cx = dx1 - dx3;//CA
+		Cy = dy1 - dy3;
+		Bx = dx3 - dx2;//BC
+		By = dy3 - dy2;
+		/*cout << "Вычисленное значение векторов:\n";
+		cout << "AB " << Ax << " " << Ay<< "\n";
+		cout << "BC " << Bx << " " << By << "\n";
+		cout << "CA " << Cx << " " << Cy << "\n";
+*/
+		
+		int a = 0; //Проверочка на параллельность осям Ох и Оу
+
+		if ((Ax * BaseX + Ay * BaseY) / ((sqrt(Ax * Ax + Ay * Ay) * sqrt(BaseX * BaseX + BaseY * BaseY))) == 0 || (Ax * BaseX + Ay * BaseY) / ((sqrt(Ax * Ax + Ay * Ay) * sqrt(BaseX * BaseX + BaseY * BaseY))) == 1 || (Ax * BaseX + Ay * BaseY) / ((sqrt(Ax * Ax + Ay * Ay) * sqrt(BaseX * BaseX + BaseY * BaseY))) == -1)
+		{
+			a++;
+		}
+
+		if ((Bx * BaseX + By * BaseY) / ((sqrt(Bx * Bx + By * By) * sqrt(BaseX * BaseX + BaseY * BaseY))) == 0 || (Bx * BaseX + By * BaseY) / ((sqrt(Bx * Bx + By * By) * sqrt(BaseX * BaseX + BaseY * BaseY))) == 1 || (Bx * BaseX + By * BaseY) / ((sqrt(Bx * Bx + By * By) * sqrt(BaseX * BaseX + BaseY * BaseY))) == -1)
+		{
+			a++;
+		}
+		if ((Cx * BaseX + Cy * BaseY) / ((sqrt(Cx * Cx + Cy * Cy) * sqrt(BaseX * BaseX + BaseY * BaseY))) == 0 || (Cx * BaseX + Cy * BaseY) / ((sqrt(Cx * Cx + Cy * Cy) * sqrt(BaseX * BaseX + BaseY * BaseY))) == 1 || (Cx * BaseX + Cy * BaseY) / ((sqrt(Cx * Cx + Cy * Cy) * sqrt(BaseX * BaseX + BaseY * BaseY))) == -1)
+		{
+			a++;
+		}
+
+		if (a == 2)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+	}
+	void ShowPoints()
+	{
+		P1.getpoint();
+		P2.getpoint();
+		P3.getpoint();
+
+	}
+	/*Triangle()    /*Реализация конструкторов
+	{
+		
+		
+			P1.setpoint(0, 0);
+			P2.setpoint(5, 0);
+			P3.setpoint(0, 5);
+
+			cout << "Сработал конструктор по умолчанию" << "\n";
+			ShowPoints();
+
+		
+	}
+    
+	Triangle(int x1, int y1,int L,int alp)
+	{
+		P1.setpoint(x1, y1);//Точка при которой прямой угол
+		int choice;
+		cout<<"1-Вершина вверх,2-Вершина вниз" << "\n";
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+		{Point P2, P3; 
+		int beta,gamma;
+		beta = 90 - alp;
+		gamma = 180 - (beta + alp);
+		
+		}
+		case 2: 
+		{Point P2, P3; 
+		int beta,gamma;
+		beta = 90 - alp;
+		gamma = 180 - (beta + alp);
+
+		
+		
+		
+		
+		
+		}
+		
+
+		
+		}
+
+	}
+
+
+	*/
+};
+
+
+
+
+
+
+int main()
+{
+	while (true)
+	{
+		setlocale(LC_ALL, "Rus");
+
+	Triangle One,Two,Third;
+		cout << "Выберите действие: " << "\n";
+		cout << "0-Выход " << "\n";
+		cout << "1-Задание треугольника по координатам точек" << "\n";
+	
+		cout << "2-Поиск точки" << "\n";
+		cout << "3-Вычисление площади прямоугольного треугольника" << "\n";
+		int choice;
+		cin >> choice;
+		switch (choice)
+		{
+		case 0: {cout << "Программа завершает работу"; return 0; break; }
+		case 1: {One.SetTriangleFirst(); break; }
+	
+		case 2: {Two.PointSearch(); break; }
+		case 3: {Third.ShowSquare(); break; }
+		}
+	}
+
+
+
+
+}
