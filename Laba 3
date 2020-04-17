@@ -1,0 +1,803 @@
+#include "Triangle.h"
+#include <iostream>
+#include <math.h>
+using namespace std;
+class Prizma : protected Triangle
+{
+protected:
+	class NPoint :protected Point
+	{
+	protected:
+
+		double z;
+	public:
+		NPoint():Point::Point()
+		{	
+			z = 0;
+		}
+		void setpoint(int x,int y,int z)
+		{
+			Triangle::Point::setpoint(x,y);
+			
+			this->z = z;
+		}
+		void getpoint()
+		{
+			Triangle::Point::getpoint();
+			cout << this->z;
+		}
+        int getX()
+		{
+			return this->x;
+		}
+		int getY()
+		{
+			return this->y;
+		}
+		int getZ()
+		{
+			return this->z;
+		}
+	
+	};
+	
+	int H=0;
+	Triangle One;
+	
+	NPoint Ap, Bp, Cp,ap,bp,cp;
+public:
+	void SetTriangle(Triangle Q) //Нижний
+	{   
+		Triangle::SetTriangleFirst();
+		double x1, y1, x2, y2, x3, y3, z = 0;
+
+
+
+		x1 = Triangle::P1.Triangle::Point::getx(Triangle::P1);
+		x2 = Triangle::P2.Triangle::Point::getx(Triangle::P2);
+		x3 = Triangle::P3.Triangle::Point::getx(Triangle::P3);
+		y1 = Triangle::P1.Triangle::Point::gety(Triangle::P1);
+		y2 = Triangle::P2.Triangle::Point::gety(Triangle::P2);
+		y3 = Triangle::P3.Triangle::Point::gety(Triangle::P3);
+
+
+		Ap.setpoint(x1, y1, z);
+		Bp.setpoint(x2, y2, z);
+		Cp.setpoint(x3, y3, z);
+		
+
+	}
+	void SetTriangle(Triangle Q,int H) //Верхний
+	{
+		
+		double x1, y1, x2, y2, x3, y3;
+	
+		x1 = Triangle::P1.Triangle::Point::getx(Triangle::P1);
+		x2 = Triangle::P2.Triangle::Point::getx(Triangle::P2);
+		x3 = Triangle::P3.Triangle::Point::getx(Triangle::P3);
+		y1 = Triangle::P1.Triangle::Point::gety(Triangle::P1);
+		y2 = Triangle::P2.Triangle::Point::gety(Triangle::P2);
+		y3 = Triangle::P3.Triangle::Point::gety(Triangle::P3);
+
+
+		
+		ap.setpoint(x1, y1, H);
+		bp.setpoint(x2, y2, H);
+		cp.setpoint(x3, y3, H);
+		
+
+	}
+	void showPoints()
+	{
+		cout << "Треугольник 1:" << "\n";
+		cout << Ap.getX()<< " ";
+		cout << Ap.getY() << " ";
+		cout << Ap.getZ() << "\n";
+		cout << Bp.getX() << " ";
+		cout << Bp.getY() << " ";
+		cout << Bp.getZ() << "\n";
+		cout << Cp.getX() << " ";
+		cout << Cp.getY() << " ";
+		cout << Cp.getZ() << "\n";
+		cout << "Треугольник 2:" << "\n";
+		cout << ap.getX() << " ";
+		cout << ap.getY() << " ";
+		cout << ap.getZ() << "\n";
+		cout << bp.getX() << " ";
+		cout << bp.getY() << " ";
+		cout << bp.getZ() << "\n";
+		cout << cp.getX() << " ";
+		cout << cp.getY() << " ";
+		cout << cp.getZ() << "\n";
+	
+	
+	}
+	void SetPrizma()
+	{
+		cout << "Введите высоту призмы " << "\n";
+		cin >> H;
+		SetTriangle(One);
+		SetTriangle(One,H);
+
+	
+	
+	}
+	void FindPoint()
+	{
+		One.PointSearch();
+	
+
+
+	
+	}
+
+	void PSquare()
+	{
+		double A = 0, B = 0, C = 0,D=0, So=0,S1=0,S2=0,S3=0,S4=0;
+		
+		
+		D = One.Triangle::Square();//Площадь треугольника в основании
+		So = 2 * D;//Площадь оснований
+	double X1, Y1, X2, Y2, X3, Y3,Z1,Z2,Z3;
+		
+		X1 = Ap.getX();
+		X2 = Bp.getX();
+		X3 = Cp.getX();
+		Y1 = Ap.getY();
+		Y2 = Bp.getY();
+		Y3 = Cp.getY();
+		Z1 = Ap.getZ();
+		Z2 = Bp.getZ();
+		Z3 = Cp.getZ();
+		A = sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1) + (Z2 - Z1) * (Z2 - Z1));
+		B = sqrt((X3 - X2) * (X3 - X2) + (Y3 - Y2) * (Y3 - Y2) + (Z3 - Z2) * (Z3 - Z2));
+		C = sqrt((X1 - X3) * (X1 - X3) + (Y1 - Y3) * (Y1 - Y3) + (Z1 - Z3) * (Z1 - Z3));
+		S1 = A * H;
+		S2 = B * H;
+		S3 = C * H;
+
+		S4 = So + S1 + S2 + S3;
+		cout << "Значение площади поверхности призмы: "<<S4;
+	
+		cout << "\n";
+	
+	}
+
+    
+
+};
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	Prizma A;
+	while (true)
+	{
+		cout << "0-Выход из программы " << "\n" << "1-Задание параметров призмы " << "\n" << "2-Вывод координат призмы " << "\n" << "3-Расчет площади поверхности призмы " << "\n" <<"4-Поиск точки в границах призмы" << "\n";
+		int choice=0;
+		cin >> choice;
+		switch (choice)
+		{
+		case 0: {cout << "Программа завершает работу"; return 0; break; }
+		case 1: {A.SetPrizma(); break; }
+		case 2: {A.showPoints(); break; }
+		case 3: {A.PSquare();  break; }
+		case 4: {A.FindPoint(); break; }
+		
+		
+		
+		}
+	
+	
+	
+	
+	}
+
+
+
+}
+
+Triangle.cpp
+#include <iostream>
+#include <math.h>
+using namespace std;
+#include "Triangle.h"
+void Triangle::Vectornoe(double xa, double ya, double xb, double yb, double xc, double yc, double xd, double yd)
+{
+	double A1 = ((xd - xa) * (yb - ya) - (yd - ya) * (xb - xa)) * ((xc - xa) * (yb - ya) - (yc - ya) * (xb - xa));
+	double B1 = ((xd - xb) * (yc - yb) - (yd - yb) * (xc - xb)) * ((xa - xb) * (yc - yb) - (ya - yb) * (xc - xb));
+	double C1 = ((xd - xc) * (ya - yc) - (yd - yc) * (xa - xc)) * ((xb - xc) * (ya - yc) - (yb - yc) * (xa - xc));
+
+	
+	int i = 0;
+	if ((A1 > 0 && B1 > 0 && C1 > 0) || (A1 < 0 && B1 < 0 && C1 < 0))
+	{
+		i++;
+		cout << "Точка принадлежит треугольнику" << "\n";
+	}
+	if ((A1 == 0 && B1 != 0 && C1 != 0) || (A1 != 0 && B1 == 0 && C1 != 0) || (A1 != 0 && B1 != 0 && C1 == 0))
+	{
+		i++;
+		int q = 0;
+		if (xd == xa && xd == xb)
+		{
+
+
+			if ((yd > ya) || (yd < ya))
+			{
+				q++;
+				cout << "Точка лежит вне треугольника на продолжении стороны AB" << "\n";
+			}
+
+
+
+
+		}
+		if (xd == xb && xd == xc)
+		{
+
+			if ((yd < yb) || (yd > yc))
+			{
+				q++;
+				cout << "Точка лежит вне треугольника на продолжении стороны BC" << "\n";
+			}
+
+		}
+		if (xd == xc && xd == xa)
+		{
+
+			if ((yd < yc) || (yd > ya))
+			{
+				q++;
+				cout << "Точка лежит вне треугольника на продолжении стороны CA" << "\n";
+			}
+
+
+		}
+		if (yd == ya && yd == yb)
+		{
+
+			if ((xd > xa) || (xd < xb))
+			{
+				q++;
+				cout << "Точка лежит вне треугольника на продолжении стороны AB" << "\n";
+			}
+
+
+
+		}
+		if (yd == yb && yd == yc)
+		{
+
+			if ((xd > xc) || (xd < xb))
+			{
+				q++;
+				cout << "Точка лежит вне треугольника на продолжении стороны BC" << "\n";
+
+			}
+
+
+		}
+		if (yd == yc && yd == ya)
+		{
+
+			if ((xd > xa) || (xd < xc))
+			{
+				q++;
+				cout << "Точка лежит вне треугольника на продолжении стороны CA" << "\n";
+			}
+
+
+		}
+		if (q == 0)
+		{
+			int P = 0;
+			double Z = 0;
+			for (P = 0; P < 100; P++)
+			{
+				Z = Z + 0.1 * P;
+				if ((((xd == xb - P) && (yd == yb + P)) || ((xd == xc + P) && (yd == yc - P))) || (((xd == xc - P) && (yd == yc + P)) || ((xd == xb + P) && (yd == yb - P))))
+
+				{
+					q++;
+					cout << "Точка лежит вне треугольника на продолжении гипотенузы " << "\n";//BC
+				}
+
+			}
+
+		}
+		if (q == 0)
+		{
+			int P = 0;
+			double Z = 0;
+			for (P = 0; P < 100; P++)
+			{
+				Z = Z + 0.1 * P;
+				if ((((xd == xa - P) && (yd == ya + P)) || ((xd == xb + P) && (yd == yb - P))) || (((xd == xb - P) && (yd == yb + P)) || ((xd == xa + P) && (yd == ya - P))))
+
+				{
+					q++;
+					cout << "Точка лежит вне треугольника на продолжении гипотенузы " << "\n";//AB
+				}
+
+			}
+
+		}
+		if (q == 0)
+		{
+			int P = 0;
+			double Z = 0;
+			for (P = 0; P < 100; P++)
+			{
+				Z = Z + 0.1 * P;
+				if ((((xd == xc - P) && (yd == yc + P)) || ((xd == xa + P) && (yd == ya - P))) || (((xd == xa - P) && (yd == ya + P)) || ((xd == xc + P) && (yd == yc - P))))
+
+				{
+					q++;
+					cout << "Точка лежит вне треугольника на продолжении гипотенузы " << "\n";//CA
+				}
+
+			}
+
+		}
+
+
+
+
+		if (q == 0)
+		{
+			cout << "Точка лежит на стороне треугольника" << "\n";
+		}
+	}
+	if ((A1 == 0 && B1 == 0 && C1 != 0) || (A1 != 0 && B1 == 0 && C1 == 0) || (A1 == 0 && B1 != 0 && C1 == 0))
+	{
+		i++;
+		cout << "Точка совпадает с вершиной треугольника" << "\n";
+	}
+	if (i == 0)
+	{
+		cout << "Точка не принадлежит треугольнику" << "\n";
+	}
+
+
+
+
+}
+
+
+void Triangle::Point::setpoint(double x, double y)
+{
+	this->x = x;
+	this->y = y;
+}
+int Triangle::Point::getx(Point A)
+{
+	return A.x;
+}
+int Triangle::Point::gety(Point A)
+{
+	return A.y;
+}
+void Triangle::Point::getpoint()
+{
+	cout << "Координаты точки : " << this->x << " " << this->y << "\n";
+}
+void Triangle::SetTriangleFirst()
+{
+	int x1, x2, x3, y1, y2, y3;
+
+
+	cout << "Введите координаты вершин прямоугольного треугольника";
+	cout << "\n";
+	cin >> x1;  cin >> y1; cout << "\n";
+	cin >> x2;  cin >> y2; cout << "\n";
+	cin >> x3;  cin >> y3; cout << "\n";
+	if (Proverka(x1, x2, x3, y1, y2, y3) == true)
+	{
+		P1.setpoint(x1, y1);
+		P2.setpoint(x2, y2);
+		P3.setpoint(x3, y3);
+	}
+	else {
+		if (Proverka(x1, x2, x3, y1, y2, y3) == false) {
+			cout << "Треугольник не является прямоугольным" << "\n"; cout << "Введите данные еще раз!" << "\n";
+			SetTriangleFirst();
+		
+		
+		}
+
+	}
+
+
+}
+void Triangle::PointSearch()
+{
+	Point A;
+	int Ax, Ay;
+	cout << "Введите координаты искомой точки" << "\n";
+	cin >> Ax;
+	cin >> Ay;
+	A.setpoint(Ax, Ay);
+	if (Recorded() == true) {
+		cout << "Использовать данные координат треугольника из предыдущего пункта ?" << "\n" << "y-да" << "\n" << "n-нет" << "\n";
+		char als = 'z';
+		while (als != 'n' && als != 'y') {
+			cin >> als;
+			if (als != 'n' && als != 'y')
+			{
+				cout << "Введенный вами символ не верен!" << "\n";
+				cout << "Попробуйте еще раз!" << "\n";
+				cin >> als;
+
+			}
+		}
+		if (als == 'y')
+		{
+			double  X1, X2, X3, Y1, Y2, Y3;
+
+			X1 = P1.getx(P1);
+			X2 = P2.getx(P2);
+			X3 = P3.getx(P3);
+			Y1 = P1.gety(P1);
+			Y2 = P2.gety(P2);
+			Y3 = P3.gety(P3);
+			Vectornoe(X1, Y1, X2, Y2, X3, Y3, Ax, Ay);
+
+
+
+
+
+		}
+		if (als == 'n')
+		{
+			SetTriangleFirst();
+			double  X1, X2, X3, Y1, Y2, Y3;
+
+			X1 = P1.getx(P1);
+			X2 = P2.getx(P2);
+			X3 = P3.getx(P3);
+			Y1 = P1.gety(P1);
+			Y2 = P2.gety(P2);
+			Y3 = P3.gety(P3);
+
+			Vectornoe(X1, Y1, X2, Y2, X3, Y3, Ax, Ay);
+		}
+	}
+
+	if (Recorded() == false) {
+		cout << "Данных о треугольнике еще не вносилось" << "\n";
+		SetTriangleFirst();
+		double  X1, X2, X3, Y1, Y2, Y3;
+
+		X1 = P1.getx(P1);
+		X2 = P2.getx(P2);
+		X3 = P3.getx(P3);
+		Y1 = P1.gety(P1);
+		Y2 = P2.gety(P2);
+		Y3 = P3.gety(P3);
+
+		Vectornoe(X1, Y1, X2, Y2, X3, Y3, Ax, Ay);
+	}
+
+
+
+	if (Recorded() == false) {
+		cout << "Данных о треугольнике еще не вносилось" << "\n";
+		SetTriangleFirst();
+		double X1, X2, X3, Y1, Y2, Y3;
+		X1 = P1.getx(P1);
+		X2 = P2.getx(P2);
+		X3 = P3.getx(P3);
+		Y1 = P1.gety(P1);
+		Y2 = P2.gety(P2);
+		Y3 = P3.gety(P3);
+
+		Vectornoe(X1, Y1, X2, Y2, X3, Y3, Ax, Ay);
+	}
+
+
+
+}
+
+bool Triangle::Recorded()
+{
+	int  X1, X2, X3, Y1, Y2, Y3;
+	X1 = P1.getx(P1);
+	X2 = P2.getx(P2);
+	X3 = P3.getx(P3);
+	Y1 = P1.gety(P1);
+	Y2 = P2.gety(P2);
+	Y3 = P3.gety(P3);
+	
+	if (X1 == 0 && X2 == 0 && X3 == 0 && Y1 == 0 && Y2 == 0 && Y3 == 0)
+	{
+		return false;
+	}
+	else { return true; }
+
+}
+
+double Triangle::Square()
+{
+	if (Recorded() == true) {
+		cout << "Использовать данные координат треугольника из предыдущего пункта?" << "\n" << "y-да" << "\n" << "n-нет" << "\n";
+		char als = 'z';
+		while (als != 'n' && als != 'y') {
+			cin >> als;
+			if (als != 'n' && als != 'y')
+			{
+				cout << "Введенный вами символ не верен!" << "\n";
+				cout << "Попробуйте еще раз!" << "\n";
+				cin >> als;
+
+			}
+			if (als == 'y')
+			{
+				double P, S, a, b, c;
+
+				int  X1, X2, X3, Y1, Y2, Y3;
+				X1 = P1.getx(P1);
+				X2 = P2.getx(P2);
+				X3 = P3.getx(P3);
+				Y1 = P1.gety(P1);
+				Y2 = P2.gety(P2);
+				Y3 = P3.gety(P3);
+				a = 0;
+				b = 0;
+				c = 0;
+				a = sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1)); //AB
+				b = sqrt((X3 - X2) * (X3 - X2) + (Y3 - Y2) * (Y3 - Y2)); //BC
+				c = sqrt((X1 - X3) * (X1 - X3) + (Y1 - Y3) * (Y1 - Y3)); //CA
+				
+				P = (a + b + c) / 2;
+				S = sqrt(P * (P - a) * (P - b) * (P - c));
+				return S;
+			}
+			if (als == 'n')
+			{
+				SetTriangleFirst();
+
+				double P, S, a, b, c;
+
+				int  X1, X2, X3, Y1, Y2, Y3;
+				X1 = P1.getx(P1);
+				X2 = P2.getx(P2);
+				X3 = P3.getx(P3);
+				Y1 = P1.gety(P1);
+				Y2 = P2.gety(P2);
+				Y3 = P3.gety(P3);
+				a = 0;
+				b = 0;
+				c = 0;
+				a = sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1)); //AB
+				b = sqrt((X3 - X2) * (X3 - X2) + (Y3 - Y2) * (Y3 - Y2)); //BC
+				c = sqrt((X1 - X3) * (X1 - X3) + (Y1 - Y3) * (Y1 - Y3)); //CA
+				P = (a + b + c) / 2;
+				S = sqrt(P * (P - a) * (P - b) * (P - c));
+				
+				return S;
+
+
+
+			}
+
+		}
+
+
+	}
+
+	if (Recorded() == false) {
+		cout << "Данных о треугольнике еще не вносилось" << "\n";
+		SetTriangleFirst();
+
+		double P, S, a, b, c;
+
+		int  X1, X2, X3, Y1, Y2, Y3;
+		X1 = P1.getx(P1);
+		X2 = P2.getx(P2);
+		X3 = P3.getx(P3);
+		Y1 = P1.gety(P1);
+		Y2 = P2.gety(P2);
+		Y3 = P3.gety(P3);
+		a = 0;
+		b = 0;
+		c = 0;
+		a = sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1)); //AB
+		b = sqrt((X3 - X2) * (X3 - X2) + (Y3 - Y2) * (Y3 - Y2)); //BC
+		c = sqrt((X1 - X3) * (X1 - X3) + (Y1 - Y3) * (Y1 - Y3)); //CA
+		P = (a + b + c) / 2;
+		S = sqrt(P * (P - a) * (P - b) * (P - c));
+		return S;
+	}
+
+}
+void Triangle::ShowSquare()
+{
+	if (Recorded() == true) {
+		cout << "Использовать данные координат треугольника из предыдущего пункта?" << "\n" << "y-да" << "\n" << "n-нет" << "\n";
+		char als = 'z';
+		while (als != 'n' && als != 'y') {
+			cin >> als;
+			if (als != 'n' && als != 'y')
+			{
+				cout << "Введенный вами символ не верен!" << "\n";
+				cout << "Попробуйте еще раз!" << "\n";
+				cin >> als;
+
+			}
+			if (als == 'y')
+			{
+				double P, S, a, b, c;
+
+				int X1, X2, X3, Y1, Y2, Y3;
+				X1 = P1.getx(P1);
+				X2 = P2.getx(P2);
+				X3 = P3.getx(P3);
+				Y1 = P1.gety(P1);
+				Y2 = P2.gety(P2);
+				Y3 = P3.gety(P3);
+				a = 0;
+				b = 0;
+				c = 0;
+				a = sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1)); //AB
+				b = sqrt((X3 - X2) * (X3 - X2) + (Y3 - Y2) * (Y3 - Y2)); //BC
+				c = sqrt((X1 - X3) * (X1 - X3) + (Y1 - Y3) * (Y1 - Y3)); //CA
+				P = (a + b + c) / 2;
+				S = sqrt(P * (P - a) * (P - b) * (P - c));
+				cout << S << "\n";
+			}
+			if (als == 'n')
+			{
+				SetTriangleFirst();
+
+				double P, S, a, b, c;
+
+				int A1, B1, C1, X1, X2, X3, Y1, Y2, Y3;
+				X1 = P1.getx(P1);
+				X2 = P2.getx(P2);
+				X3 = P3.getx(P3);
+				Y1 = P1.gety(P1);
+				Y2 = P2.gety(P2);
+				Y3 = P3.gety(P3);
+				a = 0;
+				b = 0;
+				c = 0;
+				a = sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1)); //AB
+				b = sqrt((X3 - X2) * (X3 - X2) + (Y3 - Y2) * (Y3 - Y2)); //BC
+				c = sqrt((X1 - X3) * (X1 - X3) + (Y1 - Y3) * (Y1 - Y3)); //CA
+				P = (a + b + c) / 2;
+				S = sqrt(P * (P - a) * (P - b) * (P - c));
+				cout << S<<"\n";
+			
+
+
+
+			}
+
+		}
+
+
+	}
+
+	if (Recorded() == false) {
+		cout << "Данных о треугольнике еще не вносилось" << "\n";
+		SetTriangleFirst();
+
+		double P, S, a, b, c;
+
+		int A1, B1, C1, X1, X2, X3, Y1, Y2, Y3;
+		X1 = P1.getx(P1);
+		X2 = P2.getx(P2);
+		X3 = P3.getx(P3);
+		Y1 = P1.gety(P1);
+		Y2 = P2.gety(P2);
+		Y3 = P3.gety(P3);
+		a = 0;
+		b = 0;
+		c = 0;
+		a = sqrt((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1)); //AB
+		b = sqrt((X3 - X2) * (X3 - X2) + (Y3 - Y2) * (Y3 - Y2)); //BC
+		c = sqrt((X1 - X3) * (X1 - X3) + (Y1 - Y3) * (Y1 - Y3)); //CA
+		P = (a + b + c) / 2;
+		S = sqrt(P * (P - a) * (P - b) * (P - c));
+		cout << "Вычисленное значение площади: " << S << "\n";
+	}
+
+}
+bool Triangle::Proverka(int x1, int x2, int x3, int y1, int y2, int y3)
+{
+	double dx1, dx2, dx3, dy1, dy2, dy3, Ax, Bx, Ay, By, Cx, Cy;
+	dx1 = (double)x1;
+	dx2 = (double)x2;
+	dx3 = (double)x3;
+	dy1 = (double)y1;
+	dy2 = (double)y2;
+	dy3 = (double)y3;
+
+	Ax = dx2 - dx1; //находим координаты векторов
+	Ay = dy2 - dy1;//AB
+	Cx = dx1 - dx3;//CA
+	Cy = dy1 - dy3;
+	Bx = dx3 - dx2;//BC
+	By = dy3 - dy2;
+
+
+	double z = (Ax * Bx + Ay * By) / ((sqrt(Ax * Ax + Ay * Ay) * sqrt(Bx * Bx + By * By)));//Угол между АB и BC//Косинус углов треугольника
+	double zn = (Ax * Cx + Ay * Cy) / ((sqrt(Ax * Ax + Ay * Ay) * sqrt(Cx * Cx + Cy * Cy)));//Угол между AB и CA
+	double zn1 = (Bx * Cx + By * Cy) / ((sqrt(Bx * Bx + By * By) * sqrt(Cx * Cx + Cy * Cy)));//Угол между BC и СA
+	if (z == 0.0 || zn == 0.0 || zn1 == 0.0)
+	{
+		return true;
+	}
+	else { return false; }
+
+}
+
+void Triangle::ShowPoints()
+{
+	P1.getpoint();
+	P2.getpoint();
+	P3.getpoint();
+}
+
+
+
+
+Triangle.h
+
+
+
+#pragma once
+class Triangle
+{
+protected:
+	class Point
+	{
+	protected:
+		double x;
+		double y;
+		
+
+	public:
+		Point()
+		{
+			x = 0;
+			y = 0;
+		}
+		
+		
+		void setpoint(double, double);
+		int getx(Point);
+		int gety(Point);
+		void getpoint();
+			
+
+	};
+	struct Vector
+	{
+		int x=0;
+		int y=0;
+		int z=0;
+	};
+	Point P1;
+	Point P2;
+	Point P3;
+public:
+	
+	void Vectornoe(double , double , double , double , double , double , double , double );
+	void SetTriangleFirst();
+	double Square();
+
+	void PointSearch(); //Поиск точки в области треугольника
+
+	bool Recorded(); //Проверка на заполненность координат 
+	
+	void ShowSquare();
+
+	bool Proverka(int, int, int, int, int, int);//Проверка на прямоугольность треугольника
+
+
+	
+	void ShowPoints();
+	
+};
