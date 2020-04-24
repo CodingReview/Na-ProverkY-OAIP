@@ -1,4 +1,4 @@
-include <iostream>
+#include <iostream>
 #include <math.h>
 using namespace std;
 
@@ -10,10 +10,10 @@ private:
 	private:
 		double x;
 		double y;
-
+		double z;
 
 	public:
-		Point() :x(0), y(0)
+		Point() :x(0), y(0),z(0)
 		{}
 
 		void setpoint(double x, double y)
@@ -21,16 +21,16 @@ private:
 			this->x = x;
 			this->y = y;
 		}
-		double getx(Point A)
+		double getx()
 		{
 
-			return A.x;
+			return this->x;
 
 		}
-		double gety(Point A)
+		double gety()
 		{
 
-			return A.y;
+			return this->y;
 
 		}
 		void getpoint()
@@ -43,7 +43,7 @@ private:
 	};
 	struct Vector
 	{
-	 double x = 0;
+	    double x = 0;
 		double y = 0;
 		double z = 0;
 	};
@@ -226,19 +226,11 @@ public:
 		cin >> x1;  cin >> y1; cout << "\n";
 		cin >> x2;  cin >> y2; cout << "\n";
 		cin >> x3;  cin >> y3; cout << "\n";
-		if (Proverka(x1, x2, x3, y1, y2, y3) == true)
-		{
+	
 			P1.setpoint(x1, y1);
 			P2.setpoint(x2, y2);
 			P3.setpoint(x3, y3);
-		}
-		else {
-			if (Proverka(x1, x2, x3, y1, y2, y3) == false) {
-				cout << "Треугольник не является прямоугольным" << "\n"; cout << "Введите данные еще раз!" << "\n";
-				SetTriangleFirst();
-			}
-
-		}
+		
 
 	}
 
@@ -268,12 +260,12 @@ public:
 			{
 				double  X1, X2, X3, Y1, Y2, Y3;
 
-				X1 = P1.getx(P1);
-				X2 = P2.getx(P2);
-				X3 = P3.getx(P3);
-				Y1 = P1.gety(P1);
-				Y2 = P2.gety(P2);
-				Y3 = P3.gety(P3);
+				X1 = P1.getx();
+				X2 = P2.getx();
+				X3 = P3.getx();
+				Y1 = P1.gety();
+				Y2 = P2.gety();
+				Y3 = P3.gety();
 				Vectornoe(X1, Y1, X2, Y2, X3, Y3, Ax, Ay);
 
 
@@ -286,12 +278,12 @@ public:
 				SetTriangleFirst();
 				double  X1, X2, X3, Y1, Y2, Y3;
 
-				X1 = P1.getx(P1);
-				X2 = P2.getx(P2);
-				X3 = P3.getx(P3);
-				Y1 = P1.gety(P1);
-				Y2 = P2.gety(P2);
-				Y3 = P3.gety(P3);
+				X1 = P1.getx();
+				X2 = P2.getx();
+				X3 = P3.getx();
+				Y1 = P1.gety();
+				Y2 = P2.gety();
+				Y3 = P3.gety();
 
 				Vectornoe(X1, Y1, X2, Y2, X3, Y3, Ax, Ay);
 			}
@@ -302,12 +294,12 @@ public:
 			SetTriangleFirst();
 			double  X1, X2, X3, Y1, Y2, Y3;
 
-			X1 = P1.getx(P1);
-			X2 = P2.getx(P2);
-			X3 = P3.getx(P3);
-			Y1 = P1.gety(P1);
-			Y2 = P2.gety(P2);
-			Y3 = P3.gety(P3);
+			X1 = P1.getx();
+			X2 = P2.getx();
+			X3 = P3.getx();
+			Y1 = P1.gety();
+			Y2 = P2.gety();
+			Y3 = P3.gety();
 			
 			Vectornoe(X1, Y1, X2, Y2, X3, Y3, Ax, Ay);
 		}
@@ -318,12 +310,12 @@ public:
 			cout << "Данных о треугольнике еще не вносилось" << "\n";
 			SetTriangleFirst();
 			double X1, X2, X3, Y1, Y2, Y3;
-			X1 = P1.getx(P1);
-			X2 = P2.getx(P2);
-			X3 = P3.getx(P3);
-			Y1 = P1.gety(P1);
-			Y2 = P2.gety(P2);
-			Y3 = P3.gety(P3);
+			X1 = P1.getx();
+			X2 = P2.getx();
+			X3 = P3.getx();
+			Y1 = P1.gety();
+			Y2 = P2.gety();
+			Y3 = P3.gety();
 
 			Vectornoe(X1, Y1, X2, Y2, X3, Y3, Ax, Ay);
 		}
@@ -333,12 +325,12 @@ public:
 bool Recorded() //Проверка на заполненность координат 
 {
 	double  X1, X2, X3, Y1, Y2, Y3;
-	X1 = P1.getx(P1);
-	X2 = P2.getx(P2);
-	X3 = P3.getx(P3);
-	Y1 = P1.gety(P1);
-	Y2 = P2.gety(P2);
-	Y3 = P3.gety(P3);
+	X1 = P1.getx();
+	X2 = P2.getx();
+	X3 = P3.getx();
+	Y1 = P1.gety();
+	Y2 = P2.gety();
+	Y3 = P3.gety();
 	if (X1 == 0 && X2 == 0 && X3 == 0 && Y1 == 0 && Y2 == 0 && Y3 == 0)
 	{
 		return false;
@@ -368,12 +360,12 @@ void ShowSquare() //Вычисление Плошади
 				double P, S, a, b, c;
 
 				double X1, X2, X3, Y1, Y2, Y3;
-				X1 = P1.getx(P1);
-				X2 = P2.getx(P2);
-				X3 = P3.getx(P3);
-				Y1 = P1.gety(P1);
-				Y2 = P2.gety(P2);
-				Y3 = P3.gety(P3);
+				X1 = P1.getx();
+				X2 = P2.getx();
+				X3 = P3.getx();
+				Y1 = P1.gety();
+				Y2 = P2.gety();
+				Y3 = P3.gety();
 				a = 0;
 				b = 0;
 				c = 0;
@@ -391,12 +383,12 @@ void ShowSquare() //Вычисление Плошади
 				double P, S, a, b, c;
 
 				double  X1, X2, X3, Y1, Y2, Y3;
-				X1 = P1.getx(P1);
-				X2 = P2.getx(P2);
-				X3 = P3.getx(P3);
-				Y1 = P1.gety(P1);
-				Y2 = P2.gety(P2);
-				Y3 = P3.gety(P3);
+				X1 = P1.getx();
+				X2 = P2.getx();
+				X3 = P3.getx();
+				Y1 = P1.gety();
+				Y2 = P2.gety();
+				Y3 = P3.gety();
 				a = 0;
 				b = 0;
 				c = 0;
@@ -424,12 +416,12 @@ void ShowSquare() //Вычисление Плошади
 		double P, S, a, b, c;
 
 		double  X1, X2, X3, Y1, Y2, Y3;
-		X1 = P1.getx(P1);
-		X2 = P2.getx(P2);
-		X3 = P3.getx(P3);
-		Y1 = P1.gety(P1);
-		Y2 = P2.gety(P2);
-		Y3 = P3.gety(P3);
+		X1 = P1.getx();
+		X2 = P2.getx();
+		X3 = P3.getx();
+		Y1 = P1.gety();
+		Y2 = P2.gety();
+		Y3 = P3.gety();
 		a = 0;
 		b = 0;
 		c = 0;
@@ -446,79 +438,8 @@ void ShowSquare() //Вычисление Плошади
 
 
 }
-bool Proverka(double x1, double x2, double x3, double y1, double y2, double y3)//Проверка на прямоугольность треугольника
-{
-	double Ax, Ay, Cx, Cy, Bx, By;
-
-	Ax = x2 - x1; //находим координаты векторов
-	Ay = y2 - y1;//AB
-	Cx = x1 - x3;//CA
-	Cy = y1 - y3;
-	Bx = x3 - x2;//BC
-	By = y3 - y2;
 
 
-	double z = (Ax * Bx + Ay * By) / ((sqrt(Ax * Ax + Ay * Ay) * sqrt(Bx * Bx + By * By)));//Угол между АB и BC//Косинус углов треугольника
-	double zn = (Ax * Cx + Ay * Cy) / ((sqrt(Ax * Ax + Ay * Ay) * sqrt(Cx * Cx + Cy * Cy)));//Угол между AB и CA
-	double zn1 = (Bx * Cx + By * Cy) / ((sqrt(Bx * Bx + By * By) * sqrt(Cx * Cx + Cy * Cy)));//Угол между BC и СA
-	if (z == 0.0 || zn == 0.0 || zn1 == 0.0)
-	{
-		return true;
-	}
-	else { return false; }
-
-}
-bool Proverka1(double x1, double x2, double x3, double y1, double y2, double y3)//Проверка на параллельность сторон осям координат
-{
-	double BaseX, BaseY;
-	BaseX = 5.0; BaseY = 0.0;
-
-	double Cx,Bx,Ax,Ay,By,Cy=0;
-	
-	
-	
-	
-	
-	
-
-	Ax = x2 - x1; //находим координаты векторов
-	Ay = y2 - y1;//AB
-	Cx = x1 - x3;//CA
-	Cy = y1 - y3;
-	Bx = x3 - x2;//BC
-	By = y3 - y2;
-	/*cout << "Вычисленное значение векторов:\n";
-	cout << "AB " << Ax << " " << Ay<< "\n";
-	cout << "BC " << Bx << " " << By << "\n";
-	cout << "CA " << Cx << " " << Cy << "\n";
-*/
-
-	int a = 0; //Проверочка на параллельность осям Ох и Оу
-
-	if ((Ax * BaseX + Ay * BaseY) / ((sqrt(Ax * Ax + Ay * Ay) * sqrt(BaseX * BaseX + BaseY * BaseY))) == 0 || (Ax * BaseX + Ay * BaseY) / ((sqrt(Ax * Ax + Ay * Ay) * sqrt(BaseX * BaseX + BaseY * BaseY))) == 1 || (Ax * BaseX + Ay * BaseY) / ((sqrt(Ax * Ax + Ay * Ay) * sqrt(BaseX * BaseX + BaseY * BaseY))) == -1)
-	{
-		a++;
-	}
-
-	if ((Bx * BaseX + By * BaseY) / ((sqrt(Bx * Bx + By * By) * sqrt(BaseX * BaseX + BaseY * BaseY))) == 0 || (Bx * BaseX + By * BaseY) / ((sqrt(Bx * Bx + By * By) * sqrt(BaseX * BaseX + BaseY * BaseY))) == 1 || (Bx * BaseX + By * BaseY) / ((sqrt(Bx * Bx + By * By) * sqrt(BaseX * BaseX + BaseY * BaseY))) == -1)
-	{
-		a++;
-	}
-	if ((Cx * BaseX + Cy * BaseY) / ((sqrt(Cx * Cx + Cy * Cy) * sqrt(BaseX * BaseX + BaseY * BaseY))) == 0 || (Cx * BaseX + Cy * BaseY) / ((sqrt(Cx * Cx + Cy * Cy) * sqrt(BaseX * BaseX + BaseY * BaseY))) == 1 || (Cx * BaseX + Cy * BaseY) / ((sqrt(Cx * Cx + Cy * Cy) * sqrt(BaseX * BaseX + BaseY * BaseY))) == -1)
-	{
-		a++;
-	}
-
-	if (a == 2)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-
-}
 void ShowPoints()
 {
 	P1.getpoint();
@@ -556,6 +477,7 @@ void main()
 
 
 }
+
 
 
 Прямоугольный треугольник со сторонами, параллельными осям координат. Разработать параметрические конструкторы задающие объект тремя различными способами.
